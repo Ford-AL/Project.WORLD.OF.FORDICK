@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мир Фордика 3.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://foto.devkis.net/uploads/posts/2023-01/1673379050_17-devkis-club-p-erotika-golii-negr-s-khuem-17.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #0f172a;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, 
+                #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff
+            );
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: rainbowFlow 6s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.15));
+            transition: filter 0.3s;
+        }
+        h1:hover {
+            filter: drop-shadow(0 0 30px rgba(255, 200, 100, 0.4));
+        }
+        @keyframes rainbowFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem 1.5rem;
+        }
+        .video-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 28px -8px rgba(0,0,0,0.12);
+            border-color: #b9c7da;
+        }
+        .video-thumb {
+            background: #d9e2ef;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .video-thumb video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: #000;
+        }
+        .video-thumb .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 56px;
+            height: 56px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            transition: background 0.2s ease;
+        }
+        .video-card:hover .play-icon {
+            background: rgba(37, 99, 235, 0.85);
+        }
+        .video-thumb .play-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+            margin-left: 4px;
+        }
+        .video-info {
+            padding: 1rem 1.2rem 1.4rem;
+        }
+        .video-info h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.4rem;
+            color: #fff;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .video-info p {
+            font-size: 0.9rem;
+            color: #fff;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .video-player-page {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .video-player-page.active {
+            display: flex;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            color: #FFFFFF;
+            font-weight: 500;
+            cursor: pointer;
+            width: fit-content;
+            font-size: 1rem;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .player-wrapper {
+            background: #0f172a;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .player-wrapper video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: #000;
+        }
+        .video-detail-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+        .video-detail-desc {
+            font-size: 1rem;
+            color: #fff;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .thumb-placeholder {
+            width: 100%;
+            height: 100%;
+            background: #e2e8f0;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Баннер */
+        .banner {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            animation: slideUp 0.5s ease-out;
+        }
+        .banner.hidden {
+            display: none;
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateX(-50%) translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+        .banner img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        .banner-content {
+            flex: 1;
+        }
+        .banner-content h4 {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .banner-content p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        .banner-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+        .banner-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="banner" id="banner">
+    <a href="https://imgbb.com/"><img src="https://i.ibb.co.com/4ZB331R2/IMG-20260725-171434-940.jpg" alt="Реклама" border="0" /></a>
+        <div class="banner-content">
+            <h4>Ритка в 100 метрах от вас!</h4>
+            <p>Приезжай ко мне домой, я ожидаю куни 🥵🥵🥵</p>
+        </div>
+        <button class="banner-close" id="bannerClose">✕</button>
+    </div>
+
+    <div class="container" id="app">
+        <h1>Мир фордика 3.0</h1>
+        <div class="video-grid" id="videoGrid"></div>
+    </div>
+
+    <script>
+        const videoData = [
+            {
+                "url": "https://s4.tkvids.com/remote_control.php?time=1784979524&cv=3f5e6fd9aa444ba00f0196bd1c3e417b&lr=0&cv2=6e8729ce171e92e32142df2d0670cfdd&file=/videos/152000/152599/152599.mp4&cv3=880273e07159dadd2a5e4c4b234395ef&cv4=b28d5d94851c3bb1fcb29fe28d9e4334",
+                "title": "Биг кок",
+                "description": "Трогательный дилдо был поглащен владосом"
+            },
+            {
+                "url": "https://s3.tkvids.com/remote_control.php?time=1784982179&cv=856ac3ad4fe9d35e4df70ec32a28f473&lr=0&cv2=7691520776d20a029b70f2d9f7ace72c&file=/videos/76000/76346/76346.mp4&cv3=880273e07159dadd2a5e4c4b234395ef&cv4=c8bc7ca4c54b3ac805aaf23b65b8027a",
+                "title": "Мечта фембоя",
+                "description": "Капилярчик прыгает на дилдаке и дергает писю"
+            },
+            {
+                "url": "https://s3.tkvids.com/remote_control.php?time=1784982324&cv=0d082cea17ed5fa4b4909ef77fcd5e2c&lr=0&cv2=52ac5e4b5e43b44d1fd8f13b00f2e95d&file=/videos/408000/408413/408413_360p.mp4&cv3=880273e07159dadd2a5e4c4b234395ef&cv4=57cbb6c5d238ff9f8d75553ed69b1872",
+                "title": "Стриптиз Катьки",
+                "description": "Катька трясет жирком"
+            },
+            {
+            
+                            "url": "https://s6.tkvids.com/remote_control.php?time=1784982888&cv=f441d70b56920b4c68574d31e554ff2a&lr=0&cv2=e9cac8cc0692a7cbe551b924354c72d4&file=/videos/363000/363570/363570_360p.mp4&cv3=880273e07159dadd2a5e4c4b234395ef&cv4=cb2fa7618e863591e35503e9af13260a",
+                "title": "Как создаются дроны",
+                "description": "Хохолка обрабатывает аналом снаряд"
+            },
+            {
+                "url": "https://ams-496284.u4429.eu.awmcdn.net/huyamba/4000/4071/4071sd.mp4?URISigningPackage=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBV01DRE4iLCJleHAiOjE3ODQ5ODQ4NzgsImNkbmlzdHQiOjEsImNkbmlldHMiOjE4MDAsImNkbml1YyI6InJlZ2V4Oi4qXC9odXlhbWJhXC80MDAwXC80MDcxXC80MDcxc2QubXA0In0.yx8D4w74OFyqSA_dfiv072W45F5NkRvK6XcH4PkzIMo",
+                "title": "Гитлер порно",
+                "description": "Гитлер нацисты хуисты анонисты коммунисты порно люто негры азиатки йоу бич бравл старс шашки картишки бухлишки"
+            },
+            
+            
+            
+            {
+                "url": "https://s2.tkvids.com/remote_control.php?time=1784982413&cv=329a9fb3008306ddce134b034ea80782&lr=0&cv2=37770da803131b8a3a7fd48ece738878&file=/videos/424000/424675/424675_360p.mp4&cv3=880273e07159dadd2a5e4c4b234395ef&cv4=a57b1f425a1ec3d71d53bb0e387675b9",
+                "title": "Гаутерские и Фордовские посиделки",
+                "description": "Друзьяшки решили поняшиться"
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const grid = document.getElementById('videoGrid');
+            const container = document.querySelector('.container');
+            const banner = document.getElementById('banner');
+            const bannerClose = document.getElementById('bannerClose');
+            let playerPage = null;
+
+            
+            bannerClose.addEventListener('click', function() {
+                banner.classList.add('hidden');
+            });
+
+            function createPlayerPage(video) {
+                const page = document.createElement('div');
+                page.className = 'video-player-page';
+                page.innerHTML = `
+                    <span class="back-link">← Назад к списку</span>
+                    <div class="player-wrapper">
+                        <video controls autoplay>
+                            <source src="${video.url}" type="video/mp4">
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                    </div>
+                    <h2 class="video-detail-title">${video.title}</h2>
+                    <p class="video-detail-desc">${video.description}</p>
+                `;
+                return page;
+            }
+
+            function createThumbnail(video) {
+                const thumb = document.createElement('div');
+                thumb.className = 'video-thumb';
+                
+                const videoEl = document.createElement('video');
+                videoEl.muted = true;
+                videoEl.preload = 'metadata';
+                videoEl.setAttribute('playsinline', '');
+                
+                const source = document.createElement('source');
+                source.src = video.url;
+                source.type = 'video/mp4';
+                videoEl.appendChild(source);
+                
+                videoEl.addEventListener('loadeddata', function() {
+                    this.currentTime = 0.1;
+                });
+                
+                videoEl.addEventListener('error', function() {
+                    this.style.display = 'none';
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'thumb-placeholder';
+                    thumb.appendChild(placeholder);
+                });
+                
+                thumb.appendChild(videoEl);
+                
+                const icon = document.createElement('div');
+                icon.className = 'play-icon';
+                icon.innerHTML = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+                thumb.appendChild(icon);
+                
+                return thumb;
+            }
+
+            function renderGrid(videos) {
+                grid.innerHTML = '';
+                videos.forEach((video) => {
+                    const card = document.createElement('div');
+                    card.className = 'video-card';
+                    
+                    const thumb = createThumbnail(video);
+                    card.appendChild(thumb);
+                    
+                    const info = document.createElement('div');
+                    info.className = 'video-info';
+                    info.innerHTML = `
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                    `;
+                    card.appendChild(info);
+                    
+                    card.addEventListener('click', function() {
+                        openVideo(video);
+                    });
+                    
+                    grid.appendChild(card);
+                });
+            }
+
+            function openVideo(video) {
+                if (!playerPage) {
+                    playerPage = createPlayerPage(video);
+                    container.appendChild(playerPage);
+                } else {
+                    const videoEl = playerPage.querySelector('video');
+                    videoEl.src = video.url;
+                    videoEl.load();
+                    videoEl.play().catch(e => console.log('Автовоспроизведение заблокировано'));
+                    playerPage.querySelector('.video-detail-title').textContent = video.title;
+                    playerPage.querySelector('.video-detail-desc').textContent = video.description;
+                }
+                grid.classList.add('hidden');
+                playerPage.classList.add('active');
+                const backLink = playerPage.querySelector('.back-link');
+                backLink.onclick = function() {
+                    closePlayer();
+                };
+            }
+
+            function closePlayer() {
+                if (playerPage) {
+                    playerPage.classList.remove('active');
+                    const video = playerPage.querySelector('video');
+                    if (video) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+                }
+                grid.classList.remove('hidden');
+            }
+
+            renderGrid(videoData);
+        });
+    </script>
+</body>
+</html>
