@@ -17,7 +17,7 @@
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            color: #0f172a;
+            color: #fff;
             padding: 2rem 1.5rem;
             min-height: 100vh;
             display: flex;
@@ -27,6 +27,11 @@
         .container {
             max-width: 1100px;
             width: 100%;
+        }
+        h4 {
+            font-size:1.5rem;
+            color:#ffffff;
+        
         }
         h1 {
             font-size: 3.5rem;
@@ -43,6 +48,7 @@
             animation: rainbowFlow 6s ease-in-out infinite alternate;
             filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.15));
             transition: filter 0.3s;
+            margin-bottom: 1.5rem;
         }
         h1:hover {
             filter: drop-shadow(0 0 30px rgba(255, 200, 100, 0.4));
@@ -83,12 +89,15 @@
             overflow: hidden;
             position: relative;
         }
-        .video-thumb video {
+        .video-thumb video,
+        .video-thumb iframe {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
             background: #000;
+            border: 0;
+            pointer-events: none;
         }
         .video-thumb .play-icon {
             position: absolute;
@@ -166,16 +175,19 @@
             align-items: center;
             justify-content: center;
         }
-        .player-wrapper video {
+        .player-wrapper video,
+        .player-wrapper iframe {
             width: 100%;
             height: 100%;
             display: block;
             background: #000;
+            border: 0;
         }
         .video-detail-title {
             font-size: 1.8rem;
             font-weight: 600;
             margin-top: 0.25rem;
+            color: #fff;
         }
         .video-detail-desc {
             font-size: 1rem;
@@ -197,7 +209,6 @@
             50% { opacity: 0.5; }
         }
 
-        /* Баннер */
         .banner {
             position: fixed;
             bottom: 20px;
@@ -275,7 +286,7 @@
 <body>
     
     <div class="banner" id="banner">
-    <a href="https://imgbb.com/"><img src="https://i.ibb.co.com/4ZB331R2/IMG-20260725-171434-940.jpg" alt="Реклама" border="0" /></a>
+        <a href="https://imgbb.com/"><img src="https://i.ibb.co.com/4ZB331R2/IMG-20260725-171434-940.jpg" alt="Реклама" border="0" /></a>
         <div class="banner-content">
             <h4>Ритка в 100 метрах от вас!</h4>
             <p>Приезжай ко мне домой, я ожидаю куни 🥵🥵🥵</p>
@@ -285,6 +296,7 @@
 
     <div class="container" id="app">
         <h1>Мир фордика 3.0</h1>
+        <h2>для чайников если видете вместо видео сайт то просто немного пролистывайте вниз для видосика</h2>
         <div class="video-grid" id="videoGrid"></div>
     </div>
 
@@ -292,7 +304,7 @@
         const videoData = [
             {
                 "url": "https://lq.trph1.cc/2022/02/kinkyclosetsissy-chastity-deep-fuck-huge-dildo-epic-handsfree-sissygasms-cleanup-480.mp4",
-                    "title": "Биг кок",
+                "title": "Биг кок",
                 "description": "Трогательный дилдо был поглащен владосом"
             },
             {
@@ -306,33 +318,50 @@
                 "description": "Катька трясет жирком"
             },
             {
-            
-                            "url": "https://ams-540111.u64.eu.awmcdn.net/u000064/golubok/0/89/89.mp4?URISigningPackage=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBV01DRE4iLCJleHAiOjE3ODQ5ODk2MjEsImNkbmlzdHQiOjEsImNkbmlldHMiOjE4MDAsImNkbml1YyI6InJlZ2V4Oi4qXC91MDAwMDY0XC9nb2x1Ym9rXC8wXC84OVwvODkubXA0In0.gI2FfatCjiYHO-XZfPCo5otb0yajnwiRWSLF03TgvOQ",
-                "title": "тцк",
-                "description": "Тцкшники после смены развлекаются"
+                "url": "https://50k30z6.noodlemagazine.com/watch/-85658707_456239109",
+                "title": "Мы ебались первый раз, а ты взяла обосралась",
+                "description": "Как не приятно было мне тебя ебать, а ты в говне (отсылочка на песню)",
+                "isIframe":true
             },
             {
                 "url": "https://ams-496284.u4429.eu.awmcdn.net/huyamba/4000/4071/4071sd.mp4?URISigningPackage=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBV01DRE4iLCJleHAiOjE3ODQ5ODQ4NzgsImNkbmlzdHQiOjEsImNkbmlldHMiOjE4MDAsImNkbml1YyI6InJlZ2V4Oi4qXC9odXlhbWJhXC80MDAwXC80MDcxXC80MDcxc2QubXA0In0.yx8D4w74OFyqSA_dfiv072W45F5NkRvK6XcH4PkzIMo",
                 "title": "Гитлер порно",
                 "description": "Гитлер нацисты хуисты анонисты коммунисты порно люто негры азиатки йоу бич бравл старс шашки картишки бухлишки"
             },
-            
             {
-                "url": "https://xxx.trahkino.best/get_file/36/5ec258cbfd1e3ee25782f0ab52c4a3fd81374e8b58/160000/160075/160075.mp4/?rnd=1785064395117",
-                    "title": "Сборка беспилотника",
-                "description": "Хохлушка заряжает снаряд взрывчатым пердаком"
+                "url": "https://50k30z6.noodlemagazine.com/watch/-114090117_456239117",
+                "title": "СВО",
+                "description": "СВО - сексуальные вместительные оналы",
+                "isIframe": true
             },
-
             {
-                "url": "https://xxx.trahkino.best/get_file/36/7b5ef29d7fffd5aa36b4f4abc3893fbb501f83624b/452000/452992/452992_360p.mp4/?rnd=1785064182575",
-                "title": "Тамдидидам очко коня",
-                "description": "Гитлер нацисты хуисты анонисты коммунисты порно люто негры азиатки йоу бич бравл старс шашки картишки бухлишки"
+                "url": "https://50k30z6.noodlemagazine.com/watch/-197746688_456239345",
+                "title": "Порно для маленьких",
+                "description": "Порнушка для наших меньших зрителей",
+                "isIframe": true
             },
-            
             {
                 "url": "https://cdn16.vids69.com/24xxx/video/79/3/78272/78272.360p.mp4",
                 "title": "Гаутерские и Фордовские посиделки",
                 "description": "Друзьяшки решили поняшиться"
+            },
+            {
+                "url": "https://w.4ertik.cam/video/35073/",
+                "title": "Игроки геншина развлекаются",
+                "description": "Геншинфаги изобрели дилдодрель",
+                "isIframe": true
+            },
+            {
+                "url": "https://50k30z6.noodlemagazine.com/watch/-165555095_456239203",
+                "title": "Баснь о кумысе в анусе",
+                "description": "Пример того как добывают кумыс с жеребца",
+                "isIframe": true
+            },
+            {
+                "url": "https://50k30z6.noodlemagazine.com/watch/-160448415_456241758",
+                "title": "Трансухи смотрят крд",
+                "description": "Два мужика смотрят крд",
+                "isIframe": true
             }
         ];
 
@@ -343,7 +372,6 @@
             const bannerClose = document.getElementById('bannerClose');
             let playerPage = null;
 
-            
             bannerClose.addEventListener('click', function() {
                 banner.classList.add('hidden');
             });
@@ -351,13 +379,16 @@
             function createPlayerPage(video) {
                 const page = document.createElement('div');
                 page.className = 'video-player-page';
+                let playerHtml = '';
+                if (video.isIframe) {
+                    playerHtml = `<iframe src="${video.url}" allowfullscreen allow="autoplay; encrypted-media" frameborder="0"></iframe>`;
+                } else {
+                    playerHtml = `<video controls autoplay><source src="${video.url}" type="video/mp4">Ваш браузер не поддерживает видео.</video>`;
+                }
                 page.innerHTML = `
                     <span class="back-link">← Назад к списку</span>
                     <div class="player-wrapper">
-                        <video controls autoplay>
-                            <source src="${video.url}" type="video/mp4">
-                            Ваш браузер не поддерживает видео.
-                        </video>
+                        ${playerHtml}
                     </div>
                     <h2 class="video-detail-title">${video.title}</h2>
                     <p class="video-detail-desc">${video.description}</p>
@@ -369,28 +400,37 @@
                 const thumb = document.createElement('div');
                 thumb.className = 'video-thumb';
                 
-                const videoEl = document.createElement('video');
-                videoEl.muted = true;
-                videoEl.preload = 'metadata';
-                videoEl.setAttribute('playsinline', '');
-                
-                const source = document.createElement('source');
-                source.src = video.url;
-                source.type = 'video/mp4';
-                videoEl.appendChild(source);
-                
-                videoEl.addEventListener('loadeddata', function() {
-                    this.currentTime = 0.1;
-                });
-                
-                videoEl.addEventListener('error', function() {
-                    this.style.display = 'none';
-                    const placeholder = document.createElement('div');
-                    placeholder.className = 'thumb-placeholder';
-                    thumb.appendChild(placeholder);
-                });
-                
-                thumb.appendChild(videoEl);
+                if (video.isIframe) {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = video.url;
+                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                    iframe.allowFullscreen = true;
+                    iframe.style.pointerEvents = 'none';
+                    thumb.appendChild(iframe);
+                } else {
+                    const videoEl = document.createElement('video');
+                    videoEl.muted = true;
+                    videoEl.preload = 'metadata';
+                    videoEl.setAttribute('playsinline', '');
+                    
+                    const source = document.createElement('source');
+                    source.src = video.url;
+                    source.type = 'video/mp4';
+                    videoEl.appendChild(source);
+                    
+                    videoEl.addEventListener('loadeddata', function() {
+                        this.currentTime = 0.1;
+                    });
+                    
+                    videoEl.addEventListener('error', function() {
+                        this.style.display = 'none';
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'thumb-placeholder';
+                        thumb.appendChild(placeholder);
+                    });
+                    
+                    thumb.appendChild(videoEl);
+                }
                 
                 const icon = document.createElement('div');
                 icon.className = 'play-icon';
@@ -430,10 +470,15 @@
                     playerPage = createPlayerPage(video);
                     container.appendChild(playerPage);
                 } else {
-                    const videoEl = playerPage.querySelector('video');
-                    videoEl.src = video.url;
-                    videoEl.load();
-                    videoEl.play().catch(e => console.log('Автовоспроизведение заблокировано'));
+                    const wrapper = playerPage.querySelector('.player-wrapper');
+                    let playerHtml = '';
+                    if (video.isIframe) {
+                        playerHtml = `<iframe src="${video.url}" allowfullscreen allow="autoplay; encrypted-media" frameborder="0"></iframe>`;
+                    } else {
+                        playerHtml = `<video controls autoplay><source src="${video.url}" type="video/mp4">Ваш браузер не поддерживает видео.</video>`;
+                    }
+                    wrapper.innerHTML = playerHtml;
+                    
                     playerPage.querySelector('.video-detail-title').textContent = video.title;
                     playerPage.querySelector('.video-detail-desc').textContent = video.description;
                 }
@@ -448,10 +493,15 @@
             function closePlayer() {
                 if (playerPage) {
                     playerPage.classList.remove('active');
-                    const video = playerPage.querySelector('video');
+                    const wrapper = playerPage.querySelector('.player-wrapper');
+                    const video = wrapper.querySelector('video');
                     if (video) {
                         video.pause();
                         video.currentTime = 0;
+                    }
+                    const iframe = wrapper.querySelector('iframe');
+                    if (iframe) {
+                        iframe.src = iframe.src;
                     }
                 }
                 grid.classList.remove('hidden');
@@ -461,4 +511,4 @@
         });
     </script>
 </body>
-</html>
+</html> 
