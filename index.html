@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мир Фордика 3.0</title>
+    <title>Fordhub</title>
     <style>
         * {
             margin: 0;
@@ -31,7 +31,6 @@
         h4 {
             font-size:1.5rem;
             color:#ffffff;
-        
         }
         h1 {
             font-size: 3.5rem;
@@ -54,12 +53,8 @@
             filter: drop-shadow(0 0 30px rgba(255, 200, 100, 0.4));
         }
         @keyframes rainbowFlow {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 100% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         .video-grid {
             display: grid;
@@ -281,12 +276,160 @@
         .banner-close:hover {
             background: rgba(255, 255, 255, 0.2);
         }
+
+        .banner2 {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.30);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      z-index: 100;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+    }
+    .banner2-image {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #ddd;
+    }
+    .banner2-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .banner2-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .banner2-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+    .banner2-sub {
+      font-size: 0.78rem;
+      color: #fff;
+      opacity: 0.8;
+    }
+    .banner2-action {
+      flex-shrink: 0;
+    }
+    .banner2-btn {
+      background: rgba(0, 0, 0, 0.08);
+      color: #fff;
+      border: none;
+      padding: 0.45rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 450;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .banner2-btn:hover {
+      background: #000;
+      transform: scale(0.96);
+    }
+    @media (max-width: 480px) {
+      .banner2 {
+        padding: 0.6rem 1rem;
+        gap: 0.7rem;
+      }
+      .banner2-image {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+      }
+      .banner2-title {
+        font-size: 0.85rem;
+      }
+      .banner2-sub {
+        font-size: 0.7rem;
+      }
+      .banner2-btn {
+        font-size: 0.7rem;
+        padding: 0.35rem 1rem;
+      }
+        .streak-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+           
+            z-index: 1001;
+            cursor: default;
+            user-select: none;
+        }
+        .streak-badge .flame {
+            font-size: 1.4rem;
+            animation: flameFlicker 0.5s infinite alternate;
+        }
+        .streak-badge .level {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            text-transform: lowercase;
+        }
+       
+        @keyframes flameFlicker {
+            0% { transform: scale(1) rotate(-5deg); }
+            100% { transform: scale(1.2) rotate(50deg); }
+        }
+        .streak-popup {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 14px 22px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            z-index: 1002;
+            animation: slideIn 0.5s ease-out, fadeOut 0.5s ease-in 2.5s forwards;
+            
+        }
+        @keyframes slideIn {
+            from { transform: translateX(120px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
     </style>
 </head>
 <body>
     
+    
+    <div class="streak-badge" id="streakBadge" style="display:none;"> 
+<img src="https://img.icons8.ru/?size=100&id=48416&format=png&color=ffffff" alt="Огонёк" class="flame" style="width: 24px; height: 24px;">
+        <span id="streakCount">0</span>
+        <span class="level">дрочки</span>
+    </div>
+    <div id="streakPopup"></div>
+
     <div class="banner" id="banner">
-        <a href="https://imgbb.com/"><img src="https://i.ibb.co.com/4ZB331R2/IMG-20260725-171434-940.jpg" alt="Реклама" border="0" /></a>
+        <a href="#"><img src="https://i.ibb.co.com/4ZB331R2/IMG-20260725-171434-940.jpg" alt="Реклама" border="0" /></a>
         <div class="banner-content">
             <h4>Ритка в 100 метрах от вас!</h4>
             <p>Приезжай ко мне домой, я ожидаю куни 🥵🥵🥵</p>
@@ -294,15 +437,27 @@
         <button class="banner-close" id="bannerClose">✕</button>
     </div>
 
+  <div class="banner2">
+    <div class="banner2-image">
+      <img src="https://i.ibb.co.com/3YTCPbP6/IMG-20260728-225239-943.jpg" alt="фото в баннере">
+    </div>
+    <div class="banner2-text">
+      <span class="banner2-title">Ищу</span>
+      <span class="banner2-sub">Покорного слугу который будет поклоняться мне и лизать потные пятки</span>
+    </div>
+    <div class="banner2-action">
+      <button class="banner2-btn" onclick="alert('Поклоняйся')">Узнать</button>
+    </div>
+  </div>
     <div class="container" id="app">
-        <h1>Мир фордика 3.0</h1>
+        <h1>Fordhub</h1>
         <h2>для чайников если видете вместо видео сайт то просто немного пролистывайте вниз для видосика</h2>
         <div class="video-grid" id="videoGrid"></div>
     </div>
 
     <script>
         const videoData = [
-            {
+           {
                 "url": "https://lq.trph1.cc/2022/02/kinkyclosetsissy-chastity-deep-fuck-huge-dildo-epic-handsfree-sissygasms-cleanup-480.mp4",
                 "title": "Биг кок",
                 "description": "Трогательный дилдо был поглащен владосом"
@@ -357,6 +512,48 @@
                 "description": "Пример того как добывают кумыс с жеребца",
                 "isIframe": true
             },
+               {
+                "url": "https://www.xnxx-ru.com/embedframe/ucfitoh5fd7",
+                "title": "Динозавр выебал транса альтушку",
+                "description": "Динозавр без члена засадил словно петушара трансу",
+                "isIframe": true
+            },
+               {
+                "url": "https://www.xnxx-ru.com/embedframe/ucehbdh4b8d",
+                "title": "Губка боб ебанулся и выебал 10 летнего транса",
+                "description": "Губка боб после того как поработал 15 часов на ебанной сковороде заебался и решил трахнуть маленькую трансуху",
+                "isIframe": true
+            },
+            {
+                "url": "https://www.xnxx-ru.com/embedframe/eaucove99f",
+                "title": "Говорил же жене: не ешь блять этот ебанный гороховый суп перед позой 69",
+                "description": "Жена нажралась горохового супа и отпердела ебасос мужика",
+                "isIframe": true
+            },
+              {
+                "url": "https://www.xnxx-ru.com/embedframe/hkeafadc38e",
+                "title": "Семен Лобанов нашел вторую вагину",
+                "description": "Лобанов проводил обследование как тут нашел еще одну вагину",
+                "isIframe": true
+            },
+            {
+                "url": "https://www.xnxx-ru.com/embedframe/hhupaub8c5c",
+                "title": "Две нани тверкают",
+                "description": "Когаму закрыли поэтому наня тверкает от скуки",
+                "isIframe": true
+            },
+             {
+                "url": "https://www.xnxx-ru.com/embedframe/ipcdikh0097",
+                "title": "Мужик пол года не ебался",
+                "description": "Мужик страдает недотрахом и его член повесился",
+                "isIframe": true
+            },
+            {
+                "url": "https://www.xnxx-ru.com/embedframe/ichlthfcf32",
+                "title": "Злодей бо синн наказывает зека",
+                "description": "Зек слишком ахуел поэтому бо синн решил отполировать его узенький анусочек",
+                "isIframe": true
+            },
             {
                 "url": "https://50k30z6.noodlemagazine.com/watch/-160448415_456241758",
                 "title": "Трансухи смотрят крд",
@@ -365,7 +562,99 @@
             }
         ];
 
+
+   function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = name + "=" + encodeURIComponent(value) + ";expires=" + d.toUTCString() + ";path=/;SameSite=Lax";
+}
+
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length));
+    }
+    return null;
+}
+
+function checkStreak() {
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const todayStr = today.toISOString().split('T')[0];
+    
+    let streak = parseInt(getCookie('streak_count')) || 0;
+    let lastVisit = getCookie('streak_last_visit');
+    let message = '';
+    let isNew = false;
+    
+    if (!lastVisit) {
+        
+        streak = 1;
+        message = 'Первая дрочка';
+        isNew = true;
+    } else {
+        const lastDate = new Date(lastVisit);
+        lastDate.setHours(0,0,0,0);
+        const diffDays = Math.round((today - lastDate) / (1000 * 60 * 60 * 24));
+        
+        if (lastVisit === todayStr) {
+            
+            streak += 1;
+            message = 'Первая дрочка';
+        isNew = true;
+    } else {
+        const lastDate = new Date(lastVisit);
+        lastDate.setHours(0,0,0,0);
+        const diffDays = Math.round((today - lastDate) / (1000 * 60 * 60 * 24));
+        
+        if (lastVisit === todayStr) {
+            
+            streak += 1;
+            message = `Кончи больше! ${streak} дрочек сегодня!`;
+            isNew = true;
+        } else if (diffDays === 1) {
+            
+            streak += 1;
+            message = `дрочек больше! ${streak} дрочки полряддряд `;
+            isNew = true;
+        } else if (diffDays > 1) {
+            
+            streak = 1;
+            message = 'дрочки сброшены... Начинаем дрочить!';
+            isNew = true;
+        }
+    }
+    
+    if (isNew) {
+        setCookie('streak_count', streak, 365);
+        setCookie('streak_last_visit', todayStr, 365);
+    }
+    
+    updateStreakUI(streak, message);
+}
+
+function updateStreakUI(streak, message) {
+    const badge = document.getElementById('streakBadge');
+    const count = document.getElementById('streakCount');
+    const popup = document.getElementById('streakPopup');
+    
+    if (streak > 0) {
+        count.textContent = streak;
+        badge.style.display = 'flex';
+    }
+    
+    if (message) {
+        popup.innerHTML = `<div class="streak-popup">${message}</div>`;
+        setTimeout(() => { popup.innerHTML = ''; }, 3000);
+    }
+}
+
+    
         document.addEventListener('DOMContentLoaded', function() {
+            checkStreak();
+            
             const grid = document.getElementById('videoGrid');
             const container = document.querySelector('.container');
             const banner = document.getElementById('banner');
@@ -390,7 +679,7 @@
                     <div class="player-wrapper">
                         ${playerHtml}
                     </div>
-                    <h2 class="video-detail-title">${video.title}</h2>
+                    <h2 class="video-detail-title">${video.title}</h2> class="vi
                     <p class="video-detail-desc">${video.description}</p>
                 `;
                 return page;
@@ -511,4 +800,5 @@
         });
     </script>
 </body>
-</html> 
+</html>
+  
